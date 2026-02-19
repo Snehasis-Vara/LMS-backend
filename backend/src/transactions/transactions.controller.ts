@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, Req } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { TransactionsService } from './transactions.service';
@@ -37,25 +37,26 @@ export class TransactionsController {
 
   @Get()
   @ApiOperation({ summary: 'Get all transactions' })
-  findAll() {
-    return this.transactionsService.findAll();
+  findAll(@Req() req) {
+    return this.transactionsService.findAll(req.user);
   }
 
   @Get('overdue')
-  @ApiOperation({ summary: 'Get overdue transactions' })
+  @Roles(Role.ADMIN, Role.LIBRARIAN)
+  @ApiOperation({ summary: 'Get overdue transactions (Admin/Librarian only)' })
   findOverdue() {
     return this.transactionsService.findOverdue();
   }
 
   @Get('active/:userId')
   @ApiOperation({ summary: 'Get active transactions by user' })
-  findActiveByUser(@Param('userId') userId: string) {
-    return this.transactionsService.findActiveByUser(userId);
+  findActiveByUser(@Param('userId') userId: string, @Req() req) {
+    return this.transactionsService.findActiveByUser(userId, req.user);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get transaction by ID' })
-  findOne(@Param('id') id: string) {
-    return this.transactionsService.findOne(id);
+  findOne(@Param('id') id: string, @Req() req) {
+    return this.transactionsService.findOne(id, req.user);
   }
 }

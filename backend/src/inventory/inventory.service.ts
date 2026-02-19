@@ -13,10 +13,21 @@ export class InventoryService {
 
     if (!book) throw new NotFoundException('Book not found');
 
-    return this.prisma.bookCopy.create({
-      data: dto,
-      include: { book: true },
-    });
+    const [copy] = await this.prisma.$transaction([
+      this.prisma.bookCopy.create({
+        data: dto,
+        include: { book: true },
+      }),
+      this.prisma.book.update({
+        where: { id: dto.bookId },
+        data: {
+          totalCopies: { increment: 1 },
+          availableCopies: { increment: 1 },
+        },
+      }),
+    ]);
+
+    return copy;
   }
 
   async createBulk(bookId: string, count: number) {
@@ -30,16 +41,23 @@ export class InventoryService {
 
     if (!book) throw new NotFoundException('Book not found');
 
-    const copies = await Promise.all(
-      Array.from({ length: count }).map(() =>
+    const copies = await this.prisma.$transaction([
+      ...Array.from({ length: count }).map(() =>
         this.prisma.bookCopy.create({
           data: { bookId },
           include: { book: true },
         }),
       ),
-    );
+      this.prisma.book.update({
+        where: { id: bookId },
+        data: {
+          totalCopies: { increment: count },
+          availableCopies: { increment: count },
+        },
+      }),
+    ]);
 
-    return { message: `Created ${count} copies`, copies };
+    return { message: `Created ${count} copies`, copies: copies.slice(0, -1) };
   }
 
   async findAll() {
@@ -83,8 +101,19 @@ export class InventoryService {
   }
 
   async remove(id: string) {
-    await this.findOne(id);
-    await this.prisma.bookCopy.delete({ where: { id } });
+    const copy = await this.findOne(id);
+    
+    await this.prisma.$transaction([
+      this.prisma.bookCopy.delete({ where: { id } }),
+      this.prisma.book.update({
+        where: { id: copy.bookId },
+        data: {
+          totalCopies: { decrement: 1 },
+          availableCopies: copy.status === 'AVAILABLE' ? { decrement: 1 } : undefined,
+        },
+      }),
+    ]);
+    
     return { message: 'Book copy deleted successfully' };
   }
 }

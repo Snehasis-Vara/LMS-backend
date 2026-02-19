@@ -39,15 +39,17 @@ model User {
 }
 
 model Book {
-  id            String     @id @default(uuid())
-  title         String
-  author        String
-  isbn          String     @unique
-  category      String
-  publishedYear Int
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  copies        BookCopy[]
+  id              String     @id @default(uuid())
+  title           String
+  author          String
+  isbn            String     @unique
+  category        String
+  publishedYear   Int
+  totalCopies     Int        @default(0)
+  availableCopies Int        @default(0)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  copies          BookCopy[]
 
   @@map("books")
 }

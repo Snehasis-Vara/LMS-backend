@@ -50,4 +50,28 @@ export class BooksController {
   remove(@Param('id') id: string) {
     return this.booksService.remove(id);
   }
+
+  @Post(':id/add-copies')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN, Role.LIBRARIAN)
+  @ApiOperation({ summary: 'Add copies to book (ADMIN/LIBRARIAN)' })
+  addCopies(@Param('id') id: string, @Body() body: { count: number }) {
+    return this.booksService.addCopies(id, body.count);
+  }
+
+  @Post(':id/remove-copies')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN, Role.LIBRARIAN)
+  @ApiOperation({ summary: 'Remove copies from book (ADMIN/LIBRARIAN)' })
+  removeCopies(@Param('id') id: string, @Body() body: { count: number }) {
+    return this.booksService.removeCopies(id, body.count);
+  }
+
+  @Get(':id/stats')
+  @ApiOperation({ summary: 'Get book statistics' })
+  getStats(@Param('id') id: string) {
+    return this.booksService.getStats(id);
+  }
 }

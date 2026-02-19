@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { IssueBookDto, ReturnBookDto, RenewBookDto } from './dto/transaction.dto';
 
@@ -22,26 +22,35 @@ export class TransactionsService {
       throw new BadRequestException('Book copy is not available');
     }
 
+    if (bookCopy.book.availableCopies <= 0) {
+      throw new BadRequestException('No available copies for this book');
+    }
+
     const dueDate = new Date();
     dueDate.setDate(dueDate.getDate() + 14);
 
-    const transaction = await this.prisma.transaction.create({
-      data: {
-        userId: dto.userId,
-        bookCopyId: dto.bookCopyId,
-        dueDate,
-        status: 'ISSUED',
-      },
-      include: {
-        user: true,
-        bookCopy: { include: { book: true } },
-      },
-    });
-
-    await this.prisma.bookCopy.update({
-      where: { id: dto.bookCopyId },
-      data: { status: 'ISSUED' },
-    });
+    const [transaction] = await this.prisma.$transaction([
+      this.prisma.transaction.create({
+        data: {
+          userId: dto.userId,
+          bookCopyId: dto.bookCopyId,
+          dueDate,
+          status: 'ISSUED',
+        },
+        include: {
+          user: true,
+          bookCopy: { include: { book: true } },
+        },
+      }),
+      this.prisma.bookCopy.update({
+        where: { id: dto.bookCopyId },
+        data: { status: 'ISSUED' },
+      }),
+      this.prisma.book.update({
+        where: { id: bookCopy.bookId },
+        data: { availableCopies: { decrement: 1 } },
+      }),
+    ]);
 
     return transaction;
   }
@@ -68,22 +77,27 @@ export class TransactionsService {
     );
     const fine = overdueDays * 10;
 
-    const updated = await this.prisma.transaction.update({
-      where: { id: dto.transactionId },
-      data: {
-        returnDate,
-        status: 'RETURNED',
-      },
-      include: {
-        user: true,
-        bookCopy: { include: { book: true } },
-      },
-    });
-
-    await this.prisma.bookCopy.update({
-      where: { id: transaction.bookCopyId },
-      data: { status: 'AVAILABLE' },
-    });
+    const [updated] = await this.prisma.$transaction([
+      this.prisma.transaction.update({
+        where: { id: dto.transactionId },
+        data: {
+          returnDate,
+          status: 'RETURNED',
+        },
+        include: {
+          user: true,
+          bookCopy: { include: { book: true } },
+        },
+      }),
+      this.prisma.bookCopy.update({
+        where: { id: transaction.bookCopyId },
+        data: { status: 'AVAILABLE' },
+      }),
+      this.prisma.book.update({
+        where: { id: transaction.bookCopy.bookId },
+        data: { availableCopies: { increment: 1 } },
+      }),
+    ]);
 
     return { ...updated, overdueDays, fine };
   }
@@ -123,12 +137,15 @@ export class TransactionsService {
     });
   }
 
-  async findAll() {
+  async findAll(user: any) {
+    const where = user.role === 'STUDENT' ? { userId: user.id } : {};
     return this.prisma.transaction.findMany({
+      where,
       include: {
         user: true,
         bookCopy: { include: { book: true } },
       },
+      orderBy: { issueDate: 'desc' },
     });
   }
 
@@ -156,7 +173,12 @@ export class TransactionsService {
     return overdue;
   }
 
-  async findActiveByUser(userId: string) {
+  async findActiveByUser(userId: string, user: any) {
+    // Students can only view their own transactions
+    if (user.role === 'STUDENT' && userId !== user.id) {
+      throw new ForbiddenException('You can only view your own transactions');
+    }
+    
     return this.prisma.transaction.findMany({
       where: {
         userId,
@@ -168,7 +190,7 @@ export class TransactionsService {
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, user: any) {
     const transaction = await this.prisma.transaction.findUnique({
       where: { id },
       include: {
@@ -178,6 +200,12 @@ export class TransactionsService {
     });
 
     if (!transaction) throw new NotFoundException('Transaction not found');
+    
+    // Students can only view their own transactions
+    if (user.role === 'STUDENT' && transaction.userId !== user.id) {
+      throw new ForbiddenException('You can only view your own transactions');
+    }
+    
     return transaction;
   }
 }
