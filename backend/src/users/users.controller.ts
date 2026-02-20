@@ -81,10 +81,7 @@ export class UsersController {
     @Body() dto: UpdateProfileDto,
     @UploadedFile() file?: Express.Multer.File
   ) {
-    // Update profile data
-    const updatedUser = await this.usersService.updateProfile(userId, dto);
-
-    // Handle image upload if provided
+    // Handle image upload first if provided
     if (file) {
       const optimizedPath = path.join(path.dirname(file.path), `opt-${file.filename}`);
       
@@ -96,10 +93,11 @@ export class UsersController {
       await fs.unlink(file.path);
       await fs.rename(optimizedPath, file.path);
 
-      return this.usersService.updateProfileImage(userId, file.filename);
+      await this.usersService.updateProfileImage(userId, file.filename);
     }
 
-    return updatedUser;
+    // Update profile data and return complete user
+    return this.usersService.updateProfile(userId, dto);
   }
 
   @Patch('update-profile')

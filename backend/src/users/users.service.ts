@@ -82,9 +82,14 @@ export class UsersService {
       }
     }
 
+    const updateData: any = {};
+    if (dto.name !== undefined) updateData.name = dto.name;
+    if (dto.email !== undefined) updateData.email = dto.email;
+    if (dto.phone !== undefined) updateData.phone = dto.phone || null;
+
     const user = await this.prisma.user.update({
       where: { id: userId },
-      data: dto,
+      data: updateData,
     });
 
     const { password, ...result } = user;
