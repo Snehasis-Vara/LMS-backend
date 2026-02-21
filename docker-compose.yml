@@ -32,8 +32,11 @@ services:
       JWT_SECRET: your-super-secret-jwt-key-change-in-production
       JWT_EXPIRES_IN: 7d
       PORT: 3000
-      RESEND_API_KEY: re_PJEXAADJ_4XvgH3jhBhTytKsfmEgpxkga
-      RESEND_FROM_EMAIL: Library Management <onboarding@resend.dev>
+      SMTP_HOST: smtp.gmail.com
+      SMTP_PORT: 587
+      SMTP_USER: snehasisrudra2004@gmail.com
+      SMTP_PASS: xnkx otmy qebu zgqp
+      SMTP_FROM_EMAIL: '"Library Management System" <snehasisrudra2004@gmail.com>'
     depends_on:
       db:
         condition: service_healthy
