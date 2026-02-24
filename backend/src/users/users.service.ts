@@ -63,7 +63,26 @@ export class UsersService {
   }
 
   async remove(id: string) {
-    await this.findOne(id);
+    const user = await this.findOne(id);
+    
+    // Check if user has any active transactions (ISSUED or OVERDUE)
+    const activeTransactionCount = await this.prisma.transaction.count({
+      where: { 
+        userId: id,
+        status: { in: ['ISSUED', 'OVERDUE'] }
+      }
+    });
+    
+    if (activeTransactionCount > 0) {
+      throw new ConflictException('Cannot delete user who has issued books');
+    }
+    
+    // Delete profile image if exists
+    if (user.profileImage) {
+      const filePath = path.join(process.cwd(), 'public', user.profileImage);
+      await fs.unlink(filePath).catch(() => {});
+    }
+    
     await this.prisma.user.delete({ where: { id } });
     return { message: 'User deleted successfully' };
   }
