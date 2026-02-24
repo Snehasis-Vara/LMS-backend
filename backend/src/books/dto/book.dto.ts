@@ -1,5 +1,14 @@
 import { IsString, IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
+
+export class SearchBooksDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  @Transform(({ value }) => value?.trim())
+  search?: string;
+}
 
 export class CreateBookDto {
   @ApiProperty()

@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { BooksService } from './books.service';
-import { CreateBookDto, UpdateBookDto } from './dto/book.dto';
+import { CreateBookDto, UpdateBookDto, SearchBooksDto } from './dto/book.dto';
 import { Roles } from '../common/decorators/roles.decorator';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Role } from '@prisma/client';
@@ -22,9 +22,9 @@ export class BooksController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all books' })
-  findAll() {
-    return this.booksService.findAll();
+  @ApiOperation({ summary: 'Get all books with optional search' })
+  findAll(@Query() searchDto: SearchBooksDto) {
+    return this.booksService.findAll(searchDto);
   }
 
   @Get(':id')

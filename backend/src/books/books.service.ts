@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, ConflictException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateBookDto, UpdateBookDto } from './dto/book.dto';
+import { CreateBookDto, UpdateBookDto, SearchBooksDto } from './dto/book.dto';
 
 @Injectable()
 export class BooksService {
@@ -18,8 +18,19 @@ export class BooksService {
     return this.prisma.book.create({ data: dto });
   }
 
-  async findAll() {
+  async findAll(searchDto?: SearchBooksDto) {
+    const { search } = searchDto || {};
+    
+    const whereClause = search ? {
+      OR: [
+        { title: { contains: search, mode: 'insensitive' as const } },
+        { author: { contains: search, mode: 'insensitive' as const } },
+        { isbn: { contains: search } }
+      ]
+    } : {};
+
     return this.prisma.book.findMany({
+      where: whereClause,
       include: {
         copies: true,
       },
