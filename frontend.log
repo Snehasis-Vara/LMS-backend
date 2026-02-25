@@ -1,0 +1,16 @@
+
+> frontend@0.1.0 dev
+> next dev -p 3001
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.1.180:3001
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 663ms
+ GET /login 200 in 1092ms (compile: 800ms, render: 292ms)
+ GET /dashboard 200 in 58ms (compile: 39ms, render: 19ms)
+ GET /transactions 200 in 122ms (compile: 105ms, render: 18ms)
+ GET /books 200 in 84ms (compile: 55ms, render: 29ms)
+ GET /dashboard 200 in 20ms (compile: 5ms, render: 15ms)

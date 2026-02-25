@@ -19,7 +19,7 @@ export class BooksService {
   }
 
   async findAll(searchDto?: SearchBooksDto) {
-    const { search } = searchDto || {};
+    const { search, skip = 0, limit = 3 } = searchDto || {};
     
     const whereClause = search ? {
       OR: [
@@ -28,13 +28,24 @@ export class BooksService {
         { isbn: { contains: search } }
       ]
     } : {};
+    
+    const [books, total] = await Promise.all([
+      this.prisma.book.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { title: 'asc' }
+      }),
+      this.prisma.book.count({ where: whereClause })
+    ]);
 
-    return this.prisma.book.findMany({
-      where: whereClause,
-      include: {
-        copies: true,
-      },
-    });
+    return {
+      data: books,
+      total,
+      skip,
+      limit,
+      hasMore: skip + limit < total
+    };
   }
 
   async findOne(id: string) {

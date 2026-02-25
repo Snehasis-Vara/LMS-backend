@@ -8,6 +8,18 @@ export class SearchBooksDto {
   @IsString()
   @Transform(({ value }) => value?.trim())
   search?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
+  @Transform(({ value }) => value ? parseInt(value) : 0)
+  skip?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt()
+  @Transform(({ value }) => value ? parseInt(value) : 3)
+  limit?: number;
 }
 
 export class CreateBookDto {

@@ -1,0 +1,92 @@
+
+> lms-backend@1.0.0 start:dev /home/vara/Desktop/LMS/backend
+> nest start --watch
+
+[2J[3J[H[[90m12:20:47 PM[0m] Starting compilation in watch mode...
+
+[[90m12:20:50 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[EmailService] [39m[32m🔧 Initializing Gmail SMTP...[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMulterModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBooksModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInventoryModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTransactionsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/api/auth}:[39m[38;5;3m +20ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/auth/register, POST} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/auth/forgot-password, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/auth/verify-otp, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/auth/reset-password, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUsersController {/api/users}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/me, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/profile, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/update-profile, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/profile/photo, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/profile/photo, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/verify-password, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/change-password, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/users/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBooksController {/api/books}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/books, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/books, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/books/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/books/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/books/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/books/:id/add-copies, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/books/:id/remove-copies, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/books/:id/stats, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mInventoryController {/api/inventory}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/inventory, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/inventory/bulk/:bookId, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/inventory, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/inventory/summary, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/inventory/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/inventory/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/inventory/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTransactionsController {/api/transactions}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/transactions/issue, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/transactions/return, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/transactions/renew, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/transactions, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/transactions/overdue, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/transactions/active/:userId, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/transactions/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:52 PM [32m    LOG[39m [38;5;3m[EmailService] [39m[32m✅ Gmail SMTP connection verified successfully![39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:52 PM [32m    LOG[39m [38;5;3m[EmailService] [39m[32m📧 Emails will be sent from: snehasisrudra2004@gmail.com[39m
+[32m[Nest] 77155  - [39m02/25/2026, 12:20:52 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +3ms[39m
+[31m[Nest] 77155  - [39m02/25/2026, 12:20:52 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3000[39m[38;5;3m +3ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/home/vara/Desktop/LMS/backend/node_modules/.pnpm/@nestjs+platform-express@11.1.14_@nestjs+common@11.1.14_class-transformer@0.5.1_class-v_7d3188e4aacbca3f195a0b255e769f3b/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /home/vara/Desktop/LMS/backend/node_modules/.pnpm/@nestjs+core@11.1.14_@nestjs+common@11.1.14_class-transformer@0.5.1_class-validator@0.1_488fcd591e5c2c52e06716874218c4c2/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/home/vara/Desktop/LMS/backend/node_modules/.pnpm/@nestjs+core@11.1.14_@nestjs+common@11.1.14_class-transformer@0.5.1_class-validator@0.1_488fcd591e5c2c52e06716874218c4c2/node_modules/@nestjs/core/nest-application.js:178:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async bootstrap (/home/vara/Desktop/LMS/backend/src/main.ts:40:3) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+
+Node.js v24.13.0
+ ELIFECYCLE  Command failed.

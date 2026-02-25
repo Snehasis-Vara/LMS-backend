@@ -7,34 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  LIBRARIAN
-  STUDENT
-}
-
-enum BookCopyStatus {
-  AVAILABLE
-  ISSUED
-  LOST
-}
-
-enum TransactionStatus {
-  ISSUED
-  RETURNED
-  OVERDUE
-}
-
 model User {
   id           String        @id @default(uuid())
   name         String
   email        String        @unique
   password     String
   role         Role          @default(STUDENT)
-  phone        String?
-  profileImage String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+  phone        String?
+  profileImage String?
   transactions Transaction[]
 
   @@map("users")
@@ -47,22 +29,22 @@ model Book {
   isbn            String     @unique
   category        String
   publishedYear   Int
-  totalCopies     Int        @default(0)
-  availableCopies Int        @default(0)
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
+  totalCopies     Int        @default(0)
+  availableCopies Int        @default(0)
   copies          BookCopy[]
 
   @@map("books")
 }
 
 model BookCopy {
-  id           String        @id @default(uuid())
+  id           String         @id @default(uuid())
   bookId       String
   status       BookCopyStatus @default(AVAILABLE)
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  book         Book          @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  book         Book           @relation(fields: [bookId], references: [id], onDelete: Cascade)
   transactions Transaction[]
 
   @@map("book_copies")
@@ -79,8 +61,8 @@ model Transaction {
   renewCount Int               @default(0)
   createdAt  DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
-  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   bookCopy   BookCopy          @relation(fields: [bookCopyId], references: [id], onDelete: Cascade)
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("transactions")
 }
@@ -93,4 +75,22 @@ model PasswordReset {
   createdAt DateTime @default(now())
 
   @@map("password_resets")
+}
+
+enum Role {
+  ADMIN
+  LIBRARIAN
+  STUDENT
+}
+
+enum BookCopyStatus {
+  AVAILABLE
+  ISSUED
+  LOST
+}
+
+enum TransactionStatus {
+  ISSUED
+  RETURNED
+  OVERDUE
 }
