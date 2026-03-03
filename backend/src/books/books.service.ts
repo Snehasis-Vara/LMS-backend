@@ -110,7 +110,6 @@ export class BooksService {
       );
     }
 
-    // Get available copies to delete
     const copiesToDelete = await this.prisma.bookCopy.findMany({
       where: { bookId: id, status: 'AVAILABLE' },
       take: count,
